@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>FormPrototype</title>
+    
+    <link rel="stylesheet" type="text/css" href="edstylesheet.css"/>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script type="text/javascript" src="edscript.js"></script>
+<style>
+
+#leftPanel {
+    border-color: black;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 2px;
+    padding: 5px;
+    width: 350px;
+    height: 700px;
+    float: left;
+    text-align: center;    
+}
+
+#add_01, #add_02, #add_03, #add_04, #add_05, #add_06, #add_07, #add_08, #add_09, #add_10{
+    height: 50px;
+    width: 275px;
+    text-align: center;
+    line-height: 50px;
+    background-color: #cef0ff;
+    font-family: arial;
+    font-size: .75em;
+    color: black;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: inline-block;
+    border: 1px black solid;
+    border-radius: 5px;
+    /* 
+    font-weight: bold;
+    */
+}
+
+#add_s01, #add_s02, #add_s03, #add_s04, #add_s05, #add_s06, #add_s07, #add_s08, #add_s09, #add_s10 {
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    line-height: 50px;
+    color: #ffdab3;
+    background-color: #ffdab3;
+    font-family: arial;
+    font-size: .75em;
+
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: inline-block;
+    border: 1px black solid;
+    border-radius: 5px;
+}
+#newTask {
+	height: 100px;
+	width: 250px;
+	background-color: red;
+	float: left;
+}
+
+#task01, #task02, #task03, #task04 {
+	height: 100px;
+	width: 250px;
+	background-color: red;
+	float: left;
+	border: 1px black solid;
+}
+.taskContainer {
+	width: 300px;
+	height: 110px;
+	border: 2px solid black;
+	margin: 2px;
+}
+div[name="c_taskName"] {
+	background-color: #fcf45f;
+	font-size: 20px;
+	height: 25px;
+}
+div[name="c_ro"] {
+	background-color: #f4f2c1;
+	font-size: 20px;
+	height: 25px;
+}
+div[name="c_st"] {
+	font-size: 20px;
+	float: left;
+	height: 25px;
+}
+div[name="c_et"] {
+	font-size: 20px;
+	height: 25px;
+}
+#c_ch0, #c_ch1, #c_ch2, #c_ch3, #c_note0, #c_note1, #c_note2, #c_note3, #c_stop0, #c_stop1, #c_stop2, #c_stop3, #c_ro0, #c_ro1, #c_ro2, #c_ro3 {
+	float: right;
+	background-color: blue;
+	color: white;
+	margin-right: 5px;
+	margin-left: 5px;
+	font-size: 17px;
+	height: 20px;
+	padding: 5px;
+	border-radius: 5px;
+
+}
+#rightPanel, #notePanel {
+    border: black solid 3px;
+    border-radius: 2px;
+    padding: 5px;
+    width: 300px;
+    height: 700px;
+    float: left;
+    text-align: center;
+}
+
+#saveNote, #cancelNote {
+	border: 2px solid green;
+	width: 200px;
+	margin: auto;
+	margin-top: 5px;
+	background-color: #00ff55;
+
+}
+
+#changeTo01, #changeTo02, #changeTo03, #changeTo04, #changeTo05, #changeTo06, #changeTo07, #changeTo08, #changeTo09, #changeTo10 {
+	border: 1px solid black;
+	margin: 10px;
+	padding: 5px;
+	background-color: #cef0ff;
+}
+
+#roleContainer {
+    border: black solid 3px;
+    border-radius: 2px;
+    width: 200px;
+    height: 125px;
+    text-align: center;
+    float: left;
+    font-size: .75em;
+    margin-top: 5px;
+}
+
+#changeRoleTo1, #changeRoleTo2, #changeRoleTo3, #changeRoleTo4 {
+	border: 1px solid black;
+	background-color: #cef0ff;
+	margin: 5px;
+	padding: 2px;
+	border-radius: 2px;
+	width: 100px;
+}
+
+</style>
+
+
+
+</head>
+
+<body onload="currentTime()">
+    
+    <div id="leftPanel">
+    	<div id="taskGroup">
+			SELECT TASK TYPE:<br/>
+			<!-- Review of information (vitals, lab, path, image, notes) -->
+			<!-- Patient history and discuss interim progress (e.g. discuss bowel function, fever, new complaints) -->
+			<!-- Conduct patient exam (e.g. abdominal exam) -->
+			<!-- Remove stiches, sutures, and staples -->
+			<!-- Change dressings, remove/place cast -->
+			<!-- Any other procedure (e.g. debride wound) -->
+			<!-- Counseling & care coordination -->
+			<!-- Write progress notes, orders, prescriptions, manage medications -->
+			<!-- Complete forms or other paperwork -->
+
+			<div id="add_s01">&nbsp;</div>
+			<div id="add_01">Review of info</div><br/>
+			<div id="add_s02">&nbsp;</div>
+			<div id="add_02">Pt hx and progress</div><br/>
+			<div id="add_s03">&nbsp;</div>
+			<div id="add_03">Pt exam</div><br/>
+			<div id="add_s04">&nbsp;</div>
+			<div id="add_04">Remove stitches</div><br/>
+			<div id="add_s05">&nbsp;</div>
+			<div id="add_05">Change dressings and cast</div><br/>
+			<div id="add_s06">&nbsp;</div>
+			<div id="add_06">Other procedure</div><br/>
+			<div id="add_s07">&nbsp;</div>
+			<div id="add_07">Counseling and care coord</div><br/>
+			<div id="add_s08">&nbsp;</div>
+			<div id="add_08">Write notes and orders</div><br/>
+			<div id="add_s09">&nbsp;</div>
+			<div id="add_09">Complete forms and paperwork</div><br/>
+			<div id="add_s10">&nbsp;</div>
+			<div id="add_10">Other</div>
+	        <br/>
+	        <a id = "created" href="http://medicalhumanfactors.net" target="_blank">MedStar National Center for Human Factors in Healthcare</a> 
+	    </div>
+    </div> <!-- END leftPanel -->
+    
+    <div id="middlePanel">
+		Start Time: <span id="p1">asdf</span>
+		<br/>
+		Current Time: <span id="currentTime">1</span>
+		<div class="taskContainer">
+			<div name="c_taskName">.....</div>
+			<div name="c_ro">.....</div>
+			<div name="c_st">.....</div>
+			<div name="c_et">.....</div>
+			<div id="c_note0">NOTE</div>
+			<div id="c_ch0">CHANGE</div>
+			<div id="c_stop0">STOP</div>
+			<div id="c_ro0">ROLE</div>
+			<!--<div id="c_delete01">DELETE</div>-->
+		</div>
+
+		<div class="taskContainer">
+			<div name="c_taskName">.....</div>
+			<div name="c_ro">.....</div>
+			<div name="c_st">.....</div>
+			<div name="c_et">.....</div>
+			<div id="c_note1">NOTE</div>
+			<div id="c_ch1">CHANGE</div>
+			<div id="c_stop1">STOP</div>
+			<div id="c_ro1">ROLE</div>
+		</div>
+
+
+		<div class="taskContainer">
+			<div name="c_taskName">.....</div>
+			<div name="c_ro">.....</div>
+			<div name="c_st">.....</div>
+			<div name="c_et">.....</div>
+			<div id="c_note2">NOTE</div>
+			<div id="c_ch2">CHANGE</div>
+			<div id="c_stop2">STOP</div>
+			<div id="c_ro2">ROLE</div>
+		</div>
+
+		<div class="taskContainer">
+			<div name="c_taskName">.....</div>
+			<div name="c_ro">.....</div>
+			<div name="c_st">.....</div>
+			<div name="c_et">.....</div>
+			<div id="c_note3">NOTE</div>
+			<div id="c_ch3">CHANGE</div>
+			<div id="c_stop3">STOP</div>
+			<div id="c_ro3">ROLE</div>
+		</div>
+
+		<div id="exportButton">Export Data</div>
+
+		<div id="roleContainer">
+			<div id="changeRoleTo1">Physician</div>
+			<div id="changeRoleTo2">PA/NP</div>
+			<div id="changeRoleTo3">PT</div>
+			<div id="changeRoleTo4">Other</div>			
+		</div>
+
+
+    </div> <!-- END middlePanel -->
+
+    <div id="rightPanel">
+    	<div id="changeTo01">Review of info</div>
+    	<div id="changeTo02">Pt hx and progress</div>
+    	<div id="changeTo03">Pt exam</div>
+    	<div id="changeTo04">Remove stitches</div>
+    	<div id="changeTo05">Change dressings and cast</div>
+    	<div id="changeTo06">Other procedure</div>
+    	<div id="changeTo07">Counseling and care coord</div>
+    	<div id="changeTo08">Write notes and orders</div>
+    	<div id="changeTo09">Complete forms and paperwork</div>
+    	<div id="changeTo10">Other</div>
+    </div> <!-- END rightPanel -->
+
+    <div id="notePanel">
+ 	    <input type="textbox" id = "comments" style="width: 300px; height: 50px;">
+    	 <div id="saveNote">Save Note</div>
+    	 <div id="cancelNote">Cancel</div>
+
+    </div> <!-- END notePanel -->
+
+<script>
+
+var timeOnLoad = new Date();
+var timeOnLoadSec = timeOnLoad.getTime();
+
+document.getElementById("p1").innerHTML = timeOnLoad.getHours() + ":" + timeOnLoad.getMinutes() + ":" + timeOnLoad.getSeconds();
+
+var toCheckTimeSec = timeOnLoadSec;
+var exportRate = 1000; // exports once per minute
+
+function currentTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('currentTime').innerHTML =
+    h + ":" + m + ":" + s;
+    var t = setTimeout(currentTime, 500);
+
+    var currentTimeSec = today.getTime();
+
+    if (currentTimeSec-toCheckTimeSec > exportRate*60*1000) {
+    	toCheckTimeSec = currentTimeSec;
+    	$('#exportButton').click();
+    	//alert("in");
+ 	}
+}
+
+function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+}
+
+
+</script>
+
+<script type="text/javascript" charset="utf-8">
+
+	// hide panels
+	$('#rightPanel').hide();
+	$('#notePanel').hide();
+
+	//initialize variables
+	var toRole = 0;
+	var toNote = 0;
+	var toChange = 0;
+	var numOfRec = 100;
+	var numOfFields = 11;
+	var currentIdx = -1;
+	var cnt = 0;
+	var displayTaskIdx = 0;
+	var c_taskNameList = document.getElementsByName("c_taskName");
+	var c_stList = document.getElementsByName("c_st");
+	var c_etList = document.getElementsByName("c_et");
+	var c_roleList = document.getElementsByName("c_ro");
+
+	function createArray(length) {
+    	var arr = new Array(length || 0),
+    	    i = length;
+
+	    if (arguments.length > 1) {
+        	var args = Array.prototype.slice.call(arguments, 1);
+    	    while(i--) arr[length-1 - i] = createArray.apply(this, args);
+	    }
+
+    	return arr;
+	}
+	// stores results
+	var results = createArray(numOfRec, numOfFields);
+	// 0 - task name
+	// 1 - task count
+	// 2 - start hour
+	// 3 - start minutes
+	// 4 - start seconds
+	// 5 - notes
+	// 6 - stop hour
+	// 7 - stop minutes
+	// 8 - stop seconds
+	// 9 - is stop (1 - is stopped, 0 - not stopped)
+	// 10- role
+
+
+///////////////////////////////
+// ADD TASK
+///////////////////////////////
+	function shiftDown(curr) {
+		// shift task list down
+		rIdx = curr;
+		for(i = 1;i<4; i++) { //length of shift
+			if(rIdx== -1 || results[rIdx][0]==undefined) {
+			} else {
+				c_taskNameList[i].innerHTML = results[rIdx][0];
+				c_roleList[i].innerHTML = results[rIdx][10];
+				c_stList[i].innerHTML = results[rIdx][2]+":"+results[rIdx][3]+":"+results[rIdx][4];		
+				c_etList[i].innerHTML = results[rIdx][6]+":"+results[rIdx][7]+":"+results[rIdx][8];	
+				if (results[rIdx][6]==0 && results[rIdx][7]==0 && results[rIdx][8]==0) {
+					c_taskNameList[i].style.background='#99ffbb'; // light green
+				} else {
+					c_taskNameList[i].style.background= '#ffcce0'; //light red
+				};	
+				rIdx = rIdx -1;
+			}
+		}
+	}
+
+
+	function stopOne(taskN) {
+		// stop taskN in list, 0 is top of list
+		//if already stopped, do nothing
+		//*does not catch rare condition if it was previously stopped on 0:0:0
+		var temp = currentIdx-taskN;
+
+		if (results[temp][6]==0 && results[temp][7]==0 && results[temp][8]==0) {
+			var today = new Date();
+			results[temp][6] = today.getHours();
+			results[temp][7] = today.getMinutes();
+			results[temp][8] = today.getSeconds();
+			results[temp][9] = 1;
+			c_etList[taskN].innerHTML = results[temp][6]+":"+results[temp][7]+":"+results[temp][8];	
+			c_taskNameList[taskN].style.background= '#ffcce0'; // color light red	
+		};
+
+	}
+	function stopAll() {
+		// stop all active in taskList
+		for (i=0; i<4; i++) {
+			offSet = currentIdx-i;
+			if (offSet>=0) {
+				if(results[offSet][6]==0) {
+					// stop if previously stopped
+					stopOne(i);
+				}
+			}
+		}
+
+
+	}
+
+
+	$('#add_01').click(function(){
+		stopAll();
+        $(this).effect("highlight", {}, 300);
+		shiftDown(currentIdx);
+
+		// add new task at top and increment to next
+		currentIdx = currentIdx +1;
+
+		var today = new Date();
+		results[currentIdx][0] = "Review of Info";
+		results[currentIdx][1] = cnt;
+		results[currentIdx][2] = today.getHours();
+		results[currentIdx][3] = today.getMinutes();
+		results[currentIdx][4] = today.getSeconds();
+
+		results[currentIdx][5] = "";
+		results[currentIdx][6] = 0;
+		results[currentIdx][7] = 0;
+		results[currentIdx][8] = 0;
+		results[currentIdx][9] = 0;
+		results[currentIdx][10] = "";
+
+		// always write to top
+		c_taskNameList[0].innerHTML = results[currentIdx][0] 
+		c_stList[0].innerHTML = results[currentIdx][2]+":"+results[currentIdx][3]+":"+results[currentIdx][4];
+		c_etList[0].innerHTML = results[currentIdx][6]+":"+results[currentIdx][7]+":"+results[currentIdx][8];
+		c_roleList[0].innerHTML = results[currentIdx][10];
+
+		c_taskNameList[0].style.background= '#99ffbb'; // color light green - still going
+		toRole = 0;
+		cnt = cnt+1;
+
+    });
+
+
+    $('#add_02').click(function() {
+    	stopAll();
+        $(this).effect("highlight", {}, 300);
+
+		// shift everything down
+		shiftDown(currentIdx);
+
+		// add new task at top
+		//increment to next
+		currentIdx = currentIdx +1;
+
+		var today = new Date();
+		results[currentIdx][0] = "Pt hx and progress";
+		results[currentIdx][1] = cnt;
+		results[currentIdx][2] = today.getHours();
+		results[currentIdx][3] = today.getMinutes();
+		results[currentIdx][4] = today.getSeconds();
+
+		results[currentIdx][5] = "";
+		results[currentIdx][6] = 0;
+		results[currentIdx][7] = 0;
+		results[currentIdx][8] = 0;
+		results[currentIdx][9] = 0;
+		results[currentIdx][10] = "";
+
+		// always write to top
+		c_taskNameList[0].innerHTML = results[currentIdx][0] 
+		c_stList[0].innerHTML = results[currentIdx][2]+":"+results[currentIdx][3]+":"+results[currentIdx][4];
+		c_etList[0].innerHTML = results[currentIdx][6]+":"+results[currentIdx][7]+":"+results[currentIdx][8];
+		c_roleList[0].innerHTML = results[currentIdx][10];
+		c_taskNameList[0].style.background= '#99ffbb'; // color light green - still going
+		toRole = 0;
+		cnt = cnt+1;
+    });
+
+    $('#add_03').click(function() {
+    	stopAll();
+        $(this).effect("highlight", {}, 300);
+
+		// shift everything down
+		shiftDown(currentIdx);
+
+		// add new task at top
+		//increment to next
+		currentIdx = currentIdx +1;
+
+		var today = new Date();
+		results[currentIdx][0] = "Pt exam";
+		results[currentIdx][1] = cnt;
+		results[currentIdx][2] = today.getHours();
+		results[currentIdx][3] = today.getMinutes();
+		results[currentIdx][4] = today.getSeconds();
+
+		results[currentIdx][5] = "";
+		results[currentIdx][6] = 0;
+		results[currentIdx][7] = 0;
+		results[currentIdx][8] = 0;
+		results[currentIdx][9] = 0;
+		results[currentIdx][10] = "";
+
+		// always write to top
+		c_taskNameList[0].innerHTML = results[currentIdx][0] 
+		c_stList[0].innerHTML = results[currentIdx][2]+":"+results[currentIdx][3]+":"+results[currentIdx][4];
+		c_etList[0].innerHTML = results[currentIdx][6]+":"+results[currentIdx][7]+":"+results[currentIdx][8];
+		c_roleList[0].innerHTML = results[currentIdx][10];
+		c_taskNameList[0].style.background= '#99ffbb'; // color light green - still going
+		toRole = 0;
+		cnt = cnt+1;
+    });
+
+    $('#add_04').click(function() {
+    	stopAll();
+        $(this).effect("highlight", {}, 300);
+
+		// shift everything down
+		shiftDown(currentIdx);
+
+		// add new task at top
+		//increment to next
+		currentIdx = currentIdx +1;
+
+		var today = new Date();
+		results[currentIdx][0] = "Remove stitches";
+		results[currentIdx][1] = cnt;
+		results[currentIdx][2] = today.getHours();
+		results[currentIdx][3] = today.getMinutes();
+		results[currentIdx][4] = today.getSeconds();
+
+		results[currentIdx][5] = "";
+		results[currentIdx][6] = 0;
+		results[currentIdx][7] = 0;
+		results[currentIdx][8] = 0;
+		results[currentIdx][9] = 0;
+		results[currentIdx][10] = "";
+
+		// always write to top
+		c_taskNameList[0].innerHTML = results[currentIdx][0] 
+		c_stList[0].innerHTML = results[currentIdx][2]+":"+results[currentIdx][3]+":"+results[currentIdx][4];
+		c_etList[0].innerHTML = results[currentIdx][6]+":"+results[currentIdx][7]+":"+results[currentIdx][8];
+		c_roleList[0].innerHTML = results[currentIdx][10];
+		c_taskNameList[0].style.background= '#99ffbb'; // color light green - still going
+		toRole = 0;
+		cnt = cnt+1;
+    });
+
+    $('#add_05').click(function() {
+    	stopAll();
+        $(this).effect("highlight", {}, 300);
+
+		// shift everything down
+		shiftDown(currentIdx);
+
+		// add new task at top
+		//increment to next
+		currentIdx = currentIdx +1;
+
+		var today = new Date();
+		results[currentIdx][0] = "Change dressings and cast";
+		results[currentIdx][1] = cnt;
+		results[currentIdx][2] = today.getHours();
+		results[currentIdx][3] = today.getMinutes();
+		results[currentIdx][4] = today.getSeconds();
+
+		results[currentIdx][5] = "";
+		results[currentIdx][6] = 0;
+		results[currentIdx][7] = 0;
+		results[currentIdx][8] = 0;
+		results[currentIdx][9] = 0;
+		results[currentIdx][10] = "";
+
+		// always write to top
+		c_taskNameList[0].innerHTML = results[currentIdx][0] 
+		c_stList[0].innerHTML = results[currentIdx][2]+":"+results[currentIdx][3]+":"+results[currentIdx][4];
+		c_etList[0].innerHTML = results[currentIdx][6]+":"+results[currentIdx][7]+":"+results[currentIdx][8];
+		c_roleList[0].innerHTML = results[currentIdx][10];
+		c_taskNameList[0].style.background= '#99ffbb'; // color light green - still going
+		toRole = 0;
+		cnt = cnt+1;
+    });
+
+    $('#add_06').click(function() {
+    	stopAll();
+        $(this).effect("highlight", {}, 300);
+
+		// shift everything down
+		shiftDown(currentIdx);
+
+		// add new task at top
+		//increment to next
+		currentIdx = currentIdx +1;
+
+		var today = new Date();
+		results[currentIdx][0] = "Other procedure";
+		results[currentIdx][1] = cnt;
+		results[currentIdx][2] = today.getHours();
+		results[currentIdx][3] = today.getMinutes();
+		results[currentIdx][4] = today.getSeconds();
+
+		results[currentIdx][5] = "";
+		results[currentIdx][6] = 0;
+		results[currentIdx][7] = 0;
+		results[currentIdx][8] = 0;
+		results[currentIdx][9] = 0;
+		results[currentIdx][10] = "";
+
+		// always write to top
+		c_taskNameList[0].innerHTML = results[currentIdx][0] 
+		c_stList[0].innerHTML = results[currentIdx][2]+":"+results[currentIdx][3]+":"+results[currentIdx][4];
+		c_etList[0].innerHTML = results[currentIdx][6]+":"+results[currentIdx][7]+":"+results[currentIdx][8];
+		c_roleList[0].innerHTML = results[currentIdx][10];
+		c_taskNameList[0].style.background= '#99ffbb'; // color light green - still going
+		toRole = 0;
+		cnt = cnt+1;
+    });
+
+    $('#add_07').click(function() {
+    	stopAll();
+        $(this).effect("highlight", {}, 300);
+
+		// shift everything down
+		shiftDown(currentIdx);
+
+		// add new task at top
+		//increment to next
+		currentIdx = currentIdx +1;
+
+		var today = new Date();
+		results[currentIdx][0] = "Counseling and care coord";
+		results[currentIdx][1] = cnt;
+		results[currentIdx][2] = today.getHours();
+		results[currentIdx][3] = today.getMinutes();
+		results[currentIdx][4] = today.getSeconds();
+
+		results[currentIdx][5] = "";
+		results[currentIdx][6] = 0;
+		results[currentIdx][7] = 0;
+		results[currentIdx][8] = 0;
+		results[currentIdx][9] = 0;
+		results[currentIdx][10] = "";
+
+		// always write to top
+		c_taskNameList[0].innerHTML = results[currentIdx][0] 
+		c_stList[0].innerHTML = results[currentIdx][2]+":"+results[currentIdx][3]+":"+results[currentIdx][4];
+		c_etList[0].innerHTML = results[currentIdx][6]+":"+results[currentIdx][7]+":"+results[currentIdx][8];
+		c_roleList[0].innerHTML = results[currentIdx][10];
+		c_taskNameList[0].style.background= '#99ffbb'; // color light green - still going
+		toRole = 0;
+		cnt = cnt+1;
+    });
+    $('#add_08').click(function() {
+    	stopAll();
+        $(this).effect("highlight", {}, 300);
+
+		// shift everything down
+		shiftDown(currentIdx);
+
+		// add new task at top
+		//increment to next
+		currentIdx = currentIdx +1;
+
+		var today = new Date();
+		results[currentIdx][0] = "Write notes and orders";
+		results[currentIdx][1] = cnt;
+		results[currentIdx][2] = today.getHours();
+		results[currentIdx][3] = today.getMinutes();
+		results[currentIdx][4] = today.getSeconds();
+
+		results[currentIdx][5] = "";
+		results[currentIdx][6] = 0;
+		results[currentIdx][7] = 0;
+		results[currentIdx][8] = 0;
+		results[currentIdx][9] = 0;
+		results[currentIdx][10] = "";
+
+		// always write to top
+		c_taskNameList[0].innerHTML = results[currentIdx][0] 
+		c_stList[0].innerHTML = results[currentIdx][2]+":"+results[currentIdx][3]+":"+results[currentIdx][4];
+		c_etList[0].innerHTML = results[currentIdx][6]+":"+results[currentIdx][7]+":"+results[currentIdx][8];
+		c_roleList[0].innerHTML = results[currentIdx][10];
+		c_taskNameList[0].style.background= '#99ffbb'; // color light green - still going
+		toRole = 0;
+		cnt = cnt+1;
+    });
+    $('#add_09').click(function() {
+    	stopAll();
+        $(this).effect("highlight", {}, 300);
+
+		// shift everything down
+		shiftDown(currentIdx);
+
+		// add new task at top
+		//increment to next
+		currentIdx = currentIdx +1;
+
+		var today = new Date();
+		results[currentIdx][0] = "Complete forms and paperwork";
+		results[currentIdx][1] = cnt;
+		results[currentIdx][2] = today.getHours();
+		results[currentIdx][3] = today.getMinutes();
+		results[currentIdx][4] = today.getSeconds();
+
+		results[currentIdx][5] = "";
+		results[currentIdx][6] = 0;
+		results[currentIdx][7] = 0;
+		results[currentIdx][8] = 0;
+		results[currentIdx][9] = 0;
+		results[currentIdx][10] = "";
+
+		// always write to top
+		c_taskNameList[0].innerHTML = results[currentIdx][0] 
+		c_stList[0].innerHTML = results[currentIdx][2]+":"+results[currentIdx][3]+":"+results[currentIdx][4];
+		c_etList[0].innerHTML = results[currentIdx][6]+":"+results[currentIdx][7]+":"+results[currentIdx][8];
+		c_roleList[0].innerHTML = results[currentIdx][10];
+		c_taskNameList[0].style.background= '#99ffbb'; // color light green - still going
+		cnt = cnt+1;
+    });
+    $('#add_10').click(function() {
+    	stopAll();
+        $(this).effect("highlight", {}, 300);
+
+		// shift everything down
+		shiftDown(currentIdx);
+
+		// add new task at top
+		//increment to next
+		currentIdx = currentIdx +1;
+
+		var today = new Date();
+		results[currentIdx][0] = "Other";
+		results[currentIdx][1] = cnt;
+		results[currentIdx][2] = today.getHours();
+		results[currentIdx][3] = today.getMinutes();
+		results[currentIdx][4] = today.getSeconds();
+
+		results[currentIdx][5] = "";
+		results[currentIdx][6] = 0;
+		results[currentIdx][7] = 0;
+		results[currentIdx][8] = 0;
+		results[currentIdx][9] = 0;
+		results[currentIdx][10] = "";
+
+		// always write to top
+		c_taskNameList[0].innerHTML = results[currentIdx][0] 
+		c_stList[0].innerHTML = results[currentIdx][2]+":"+results[currentIdx][3]+":"+results[currentIdx][4];
+		c_etList[0].innerHTML = results[currentIdx][6]+":"+results[currentIdx][7]+":"+results[currentIdx][8];
+		c_roleList[0].innerHTML = results[currentIdx][10];
+		c_taskNameList[0].style.background= '#99ffbb'; // color light green - still going
+		toRole = 0;
+		cnt = cnt+1;
+    });
+    $('#add_s01').click(function() {
+        $(this).effect("highlight", {}, 300);
+
+		// shift everything down
+		shiftDown(currentIdx);
+
+		// add new task at top
+		//increment to next
+		currentIdx = currentIdx +1;
+
+		var today = new Date();
+		results[currentIdx][0] = "Review of info";
+		results[currentIdx][1] = cnt;
+		results[currentIdx][2] = today.getHours();
+		results[currentIdx][3] = today.getMinutes();
+		results[currentIdx][4] = today.getSeconds();
+
+		results[currentIdx][5] = "";
+		results[currentIdx][6] = 0;
+		results[currentIdx][7] = 0;
+		results[currentIdx][8] = 0;
+		results[currentIdx][9] = 0;
+		results[currentIdx][10] = "";
+
+		// always write to top
+		c_taskNameList[0].innerHTML = results[currentIdx][0] 
+		c_stList[0].innerHTML = results[currentIdx][2]+":"+results[currentIdx][3]+":"+results[currentIdx][4];
+		c_etList[0].innerHTML = results[currentIdx][6]+":"+results[currentIdx][7]+":"+results[currentIdx][8];
+		c_roleList[0].innerHTML = results[currentIdx][10];
+		c_taskNameList[0].style.background= '#99ffbb'; // color light green - still going
+		toRole = 0;
+		cnt = cnt+1;
+    });
+
+    $('#add_s02').click(function() {
+        $(this).effect("highlight", {}, 300);
+
+		// shift everything down
+		shiftDown(currentIdx);
+
+		// add new task at top
+		//increment to next
+		currentIdx = currentIdx +1;
+
+		var today = new Date();
+		results[currentIdx][0] = "Pt hx and progress";
+		results[currentIdx][1] = cnt;
+		results[currentIdx][2] = today.getHours();
+		results[currentIdx][3] = today.getMinutes();
+		results[currentIdx][4] = today.getSeconds();
+
+		results[currentIdx][5] = "";
+		results[currentIdx][6] = 0;
+		results[currentIdx][7] = 0;
+		results[currentIdx][8] = 0;
+		results[currentIdx][9] = 0;
+		results[currentIdx][10] = "";
+
+		// always write to top
+		c_taskNameList[0].innerHTML = results[currentIdx][0] 
+		c_stList[0].innerHTML = results[currentIdx][2]+":"+results[currentIdx][3]+":"+results[currentIdx][4];
+		c_etList[0].innerHTML = results[currentIdx][6]+":"+results[currentIdx][7]+":"+results[currentIdx][8];
+		c_roleList[0].innerHTML = results[currentIdx][10];
+		c_taskNameList[0].style.background= '#99ffbb'; // color light green - still going
+		toRole = 0;
+		cnt = cnt+1;
+    });
+    $('#add_s03').click(function() {
+        $(this).effect("highlight", {}, 300);
+
+		// shift everything down
+		shiftDown(currentIdx);
+
+		// add new task at top
+		//increment to next
+		currentIdx = currentIdx +1;
+
+		var today = new Date();
+		results[currentIdx][0] = "Pt exam";
+		results[currentIdx][1] = cnt;
+		results[currentIdx][2] = today.getHours();
+		results[currentIdx][3] = today.getMinutes();
+		results[currentIdx][4] = today.getSeconds();
+
+		results[currentIdx][5] = "";
+		results[currentIdx][6] = 0;
+		results[currentIdx][7] = 0;
+		results[currentIdx][8] = 0;
+		results[currentIdx][9] = 0;
+		results[currentIdx][10] = "";
+
+		// always write to top
+		c_taskNameList[0].innerHTML = results[currentIdx][0] 
+		c_stList[0].innerHTML = results[currentIdx][2]+":"+results[currentIdx][3]+":"+results[currentIdx][4];
+		c_etList[0].innerHTML = results[currentIdx][6]+":"+results[currentIdx][7]+":"+results[currentIdx][8];
+		c_roleList[0].innerHTML = results[currentIdx][10];
+		c_taskNameList[0].style.background= '#99ffbb'; // color light green - still going
+		toRole = 0;
+		cnt = cnt+1;
+    });
+    $('#add_s04').click(function() {
+        $(this).effect("highlight", {}, 300);
+
+		// shift everything down
+		shiftDown(currentIdx);
+
+		// add new task at top
+		//increment to next
+		currentIdx = currentIdx +1;
+
+		var today = new Date();
+		results[currentIdx][0] = "Remove stitches";
+		results[currentIdx][1] = cnt;
+		results[currentIdx][2] = today.getHours();
+		results[currentIdx][3] = today.getMinutes();
+		results[currentIdx][4] = today.getSeconds();
+
+		results[currentIdx][5] = "";
+		results[currentIdx][6] = 0;
+		results[currentIdx][7] = 0;
+		results[currentIdx][8] = 0;
+		results[currentIdx][9] = 0;
+		results[currentIdx][10] = "";
+
+		// always write to top
+		c_taskNameList[0].innerHTML = results[currentIdx][0] 
+		c_stList[0].innerHTML = results[currentIdx][2]+":"+results[currentIdx][3]+":"+results[currentIdx][4];
+		c_etList[0].innerHTML = results[currentIdx][6]+":"+results[currentIdx][7]+":"+results[currentIdx][8];
+		c_roleList[0].innerHTML = results[currentIdx][10];
+		c_taskNameList[0].style.background= '#99ffbb'; // color light green - still going
+		toRole = 0;
+		cnt = cnt+1;
+    });
+    $('#add_s05').click(function() {
+        $(this).effect("highlight", {}, 300);
+
+		// shift everything down
+		shiftDown(currentIdx);
+
+		// add new task at top
+		//increment to next
+		currentIdx = currentIdx +1;
+
+		var today = new Date();
+		results[currentIdx][0] = "Change dressings and cast";
+		results[currentIdx][1] = cnt;
+		results[currentIdx][2] = today.getHours();
+		results[currentIdx][3] = today.getMinutes();
+		results[currentIdx][4] = today.getSeconds();
+
+		results[currentIdx][5] = "";
+		results[currentIdx][6] = 0;
+		results[currentIdx][7] = 0;
+		results[currentIdx][8] = 0;
+		results[currentIdx][9] = 0;
+		results[currentIdx][10] = "";
+
+		// always write to top
+		c_taskNameList[0].innerHTML = results[currentIdx][0] 
+		c_stList[0].innerHTML = results[currentIdx][2]+":"+results[currentIdx][3]+":"+results[currentIdx][4];
+		c_etList[0].innerHTML = results[currentIdx][6]+":"+results[currentIdx][7]+":"+results[currentIdx][8];
+		c_roleList[0].innerHTML = results[currentIdx][10];
+		c_taskNameList[0].style.background= '#99ffbb'; // color light green - still going
+		toRole = 0;
+		cnt = cnt+1;
+    });
+    $('#add_s06').click(function() {
+        $(this).effect("highlight", {}, 300);
+
+		// shift everything down
+		shiftDown(currentIdx);
+
+		// add new task at top
+		//increment to next
+		currentIdx = currentIdx +1;
+
+		var today = new Date();
+		results[currentIdx][0] = "Other procedure";
+		results[currentIdx][1] = cnt;
+		results[currentIdx][2] = today.getHours();
+		results[currentIdx][3] = today.getMinutes();
+		results[currentIdx][4] = today.getSeconds();
+
+		results[currentIdx][5] = "";
+		results[currentIdx][6] = 0;
+		results[currentIdx][7] = 0;
+		results[currentIdx][8] = 0;
+		results[currentIdx][9] = 0;
+		results[currentIdx][10] = "";
+
+		// always write to top
+		c_taskNameList[0].innerHTML = results[currentIdx][0] 
+		c_stList[0].innerHTML = results[currentIdx][2]+":"+results[currentIdx][3]+":"+results[currentIdx][4];
+		c_etList[0].innerHTML = results[currentIdx][6]+":"+results[currentIdx][7]+":"+results[currentIdx][8];
+		c_roleList[0].innerHTML = results[currentIdx][10];
+		c_taskNameList[0].style.background= '#99ffbb'; // color light green - still going
+		toRole = 0;
+		cnt = cnt+1;
+    });
+    $('#add_s07').click(function() {
+        $(this).effect("highlight", {}, 300);
+
+		// shift everything down
+		shiftDown(currentIdx);
+
+		// add new task at top
+		//increment to next
+		currentIdx = currentIdx +1;
+
+		var today = new Date();
+		results[currentIdx][0] = "Counseling and care coord";
+		results[currentIdx][1] = cnt;
+		results[currentIdx][2] = today.getHours();
+		results[currentIdx][3] = today.getMinutes();
+		results[currentIdx][4] = today.getSeconds();
+
+		results[currentIdx][5] = "";
+		results[currentIdx][6] = 0;
+		results[currentIdx][7] = 0;
+		results[currentIdx][8] = 0;
+		results[currentIdx][9] = 0;
+		results[currentIdx][10] = "";
+
+		// always write to top
+		c_taskNameList[0].innerHTML = results[currentIdx][0] 
+		c_stList[0].innerHTML = results[currentIdx][2]+":"+results[currentIdx][3]+":"+results[currentIdx][4];
+		c_etList[0].innerHTML = results[currentIdx][6]+":"+results[currentIdx][7]+":"+results[currentIdx][8];
+		c_roleList[0].innerHTML = results[currentIdx][10];
+		c_taskNameList[0].style.background= '#99ffbb'; // color light green - still going
+		toRole = 0;
+		cnt = cnt+1;
+    });
+    $('#add_s08').click(function() {
+        $(this).effect("highlight", {}, 300);
+
+		// shift everything down
+		shiftDown(currentIdx);
+
+		// add new task at top
+		//increment to next
+		currentIdx = currentIdx +1;
+
+		var today = new Date();
+		results[currentIdx][0] = "Write notes and orders";
+		results[currentIdx][1] = cnt;
+		results[currentIdx][2] = today.getHours();
+		results[currentIdx][3] = today.getMinutes();
+		results[currentIdx][4] = today.getSeconds();
+
+		results[currentIdx][5] = "";
+		results[currentIdx][6] = 0;
+		results[currentIdx][7] = 0;
+		results[currentIdx][8] = 0;
+		results[currentIdx][9] = 0;
+		results[currentIdx][10] = "";
+
+		// always write to top
+		c_taskNameList[0].innerHTML = results[currentIdx][0] 
+		c_stList[0].innerHTML = results[currentIdx][2]+":"+results[currentIdx][3]+":"+results[currentIdx][4];
+		c_etList[0].innerHTML = results[currentIdx][6]+":"+results[currentIdx][7]+":"+results[currentIdx][8];
+		c_roleList[0].innerHTML = results[currentIdx][10];
+		c_taskNameList[0].style.background= '#99ffbb'; // color light green - still going
+		toRole = 0;
+		cnt = cnt+1;
+    });
+    $('#add_s09').click(function() {
+        $(this).effect("highlight", {}, 300);
+
+		// shift everything down
+		shiftDown(currentIdx);
+
+		// add new task at top
+		//increment to next
+		currentIdx = currentIdx +1;
+
+		var today = new Date();
+		results[currentIdx][0] = "Complete forms and paperwork";
+		results[currentIdx][1] = cnt;
+		results[currentIdx][2] = today.getHours();
+		results[currentIdx][3] = today.getMinutes();
+		results[currentIdx][4] = today.getSeconds();
+
+		results[currentIdx][5] = "";
+		results[currentIdx][6] = 0;
+		results[currentIdx][7] = 0;
+		results[currentIdx][8] = 0;
+		results[currentIdx][9] = 0;
+		results[currentIdx][10] = "";
+
+		// always write to top
+		c_taskNameList[0].innerHTML = results[currentIdx][0] 
+		c_stList[0].innerHTML = results[currentIdx][2]+":"+results[currentIdx][3]+":"+results[currentIdx][4];
+		c_etList[0].innerHTML = results[currentIdx][6]+":"+results[currentIdx][7]+":"+results[currentIdx][8];
+		c_roleList[0].innerHTML = results[currentIdx][10];
+		c_taskNameList[0].style.background= '#99ffbb'; // color light green - still going
+		toRole = 0;
+		cnt = cnt+1;
+    });
+    $('#add_s10').click(function() {
+        $(this).effect("highlight", {}, 300);
+
+		// shift everything down
+		shiftDown(currentIdx);
+
+		// add new task at top
+		//increment to next
+		currentIdx = currentIdx +1;
+
+		var today = new Date();
+		results[currentIdx][0] = "Other";
+		results[currentIdx][1] = cnt;
+		results[currentIdx][2] = today.getHours();
+		results[currentIdx][3] = today.getMinutes();
+		results[currentIdx][4] = today.getSeconds();
+
+		results[currentIdx][5] = "";
+		results[currentIdx][6] = 0;
+		results[currentIdx][7] = 0;
+		results[currentIdx][8] = 0;
+		results[currentIdx][9] = 0;
+		results[currentIdx][10] = "";
+
+		// always write to top
+		c_taskNameList[0].innerHTML = results[currentIdx][0] 
+		c_stList[0].innerHTML = results[currentIdx][2]+":"+results[currentIdx][3]+":"+results[currentIdx][4];
+		c_etList[0].innerHTML = results[currentIdx][6]+":"+results[currentIdx][7]+":"+results[currentIdx][8];
+		c_roleList[0].innerHTML = results[currentIdx][10];
+		c_taskNameList[0].style.background= '#99ffbb'; // color light green - still going
+		toRole = 0;
+		cnt = cnt+1;
+
+    });
+///////////////////////////
+// Export
+///////////////////////////
+	function exportResults() {
+
+		var openAsTab = true;
+
+		if (openAsTab) {
+	        var win=window.open("data.html", '_blank');
+	        var exportString = results;
+	        win.document.write(exportString);
+
+	//        win.focus();
+		} else {
+			var data = results
+			var csvContent = "data:text/csv;charset=utf-8,";
+			data.forEach(function(infoArray, index){
+				dataString = infoArray.join(",");
+	   			csvContent += index < data.length ? dataString+ "\n" : dataString;
+			}); 
+
+			var encodedUri = encodeURI(csvContent);
+			var link = document.createElement("a");
+			link.setAttribute("href", encodedUri);
+			link.setAttribute("download", "my_data.csv");
+
+			link.click(); // This will download the data file named "my_data.csv".
+		};
+
+
+
+
+
+
+	}
+    $('#exportButton').click(function() {
+        $(this).effect("highlight", {}, 300);
+		exportResults();    	
+    })
+
+
+///////////////////////////////
+// DELETE TASK
+//////////////////////////////
+    $('#c_delete').click(function(){
+        $(this).effect("highlight", {}, 300);
+    	alert("are you sure?");
+    });
+
+///////////////////////////////
+// STOP TASK
+//////////////////////////////
+	$('#c_stop0').click(function(){
+        $(this).effect("highlight", {}, 300);
+		stopOne(0);
+	});
+	$('#c_stop1').click(function(){
+        $(this).effect("highlight", {}, 300);
+		stopOne(1);
+	});
+	$('#c_stop2').click(function(){
+        $(this).effect("highlight", {}, 300);
+		stopOne(2);
+	});
+	$('#c_stop3').click(function(){
+        $(this).effect("highlight", {}, 300);
+		stopOne(3);
+	});
+
+///////////////////////////////
+// NOTES
+//////////////////////////////
+	$('#c_note0').click(function() {
+        $(this).effect("highlight", {}, 300);
+		toNote = 0;
+		temp = currentIdx-toNote
+		if (results[temp][5]==null) {
+			document.getElementById('comments').value = ""
+		} else {
+			document.getElementById('comments').value = results[temp][5];
+		}
+		$('#notePanel').show();
+	});
+	$('#c_note1').click(function() {
+        $(this).effect("highlight", {}, 300);
+		toNote = 1;
+		temp = currentIdx-toNote
+		if (results[temp][5]==null) {
+			document.getElementById('comments').value = ""
+		} else {
+			document.getElementById('comments').value = results[temp][5];
+		}
+		$('#notePanel').show();
+	});
+	$('#c_note2').click(function() {
+        $(this).effect("highlight", {}, 300);
+		toNote = 2;
+		temp = currentIdx-toNote
+		if (results[temp][5]==null) {
+			document.getElementById('comments').value = ""
+		} else {
+			document.getElementById('comments').value = results[temp][5];
+		}
+		$('#notePanel').show();
+	});
+	$('#c_note3').click(function() {
+        $(this).effect("highlight", {}, 300);
+		toNote = 3;
+		temp = currentIdx-toNote
+		if (results[temp][5]==null) {
+			document.getElementById('comments').value = ""
+		} else {
+			document.getElementById('comments').value = results[temp][5];
+		}
+		$('#notePanel').show();
+	});
+
+	$('#saveNote').click(function(){
+        $(this).effect("highlight", {}, 300);
+		temp = currentIdx-toNote;
+		var str = document.getElementById('comments').value;
+		var res = str.replace(/,/g, "...")
+		results[temp][5] = res;
+		$('#notePanel').hide();
+		document.getElementById('comments').value = ""
+	});
+
+    $('#cancelNote').click(function(){
+        $(this).effect("highlight", {}, 300);
+    	$('#notePanel').hide();
+    	document.getElementById('comments').value = ""
+    });
+
+/////////////////////////////////////
+// CHANGE TASK TYPE
+/////////////////////////////////////
+	$('#c_ch0').click(function() {
+		$(this).effect("highlight", {}, 300);
+		toChange = 0;
+		$('#rightPanel').show();
+	});
+	$('#c_ch1').click(function() {
+		$(this).effect("highlight", {}, 300);
+		toChange = 1;
+		$('#rightPanel').show();
+	});
+	$('#c_ch2').click(function() {
+		$(this).effect("highlight", {}, 300);
+		toChange = 2;
+		$('#rightPanel').show();
+	});
+	$('#c_ch3').click(function() {
+		$(this).effect("highlight", {}, 300);
+		toChange = 3;
+		$('#rightPanel').show();
+	});
+
+	$('#changeTo01').click(function(){
+		$(this).effect("highlight", {}, 300);
+		temp = currentIdx-toChange;
+		if(temp>=0) {
+			results[temp][0] = "Review of Info";
+			c_taskNameList[toChange].innerHTML = results[temp][0]
+		}
+		$('#rightPanel').hide();
+	});
+	$('#changeTo02').click(function(){
+		$(this).effect("highlight", {}, 300);
+		temp = currentIdx-toChange;
+		if(temp>=0) {
+			results[temp][0] = "Pt hx and progress";
+			c_taskNameList[toChange].innerHTML = results[temp][0]
+		}
+		$('#rightPanel').hide();
+	});
+	$('#changeTo03').click(function(){
+		$(this).effect("highlight", {}, 300);
+		temp = currentIdx-toChange;
+		if(temp>=0) {
+			results[temp][0] = "Pt exam";
+			c_taskNameList[toChange].innerHTML = results[temp][0]
+		}
+		$('#rightPanel').hide();
+	});
+	$('#changeTo04').click(function(){
+		$(this).effect("highlight", {}, 300);
+		temp = currentIdx-toChange;
+		if(temp>=0) {
+			results[temp][0] = "Remove stitches";
+			c_taskNameList[toChange].innerHTML = results[temp][0]
+		}
+		$('#rightPanel').hide();
+	});
+	$('#changeTo05').click(function(){
+		$(this).effect("highlight", {}, 300);
+		temp = currentIdx-toChange;
+		if(temp>=0) {
+			results[temp][0] = "Change dressings and cast";
+			c_taskNameList[toChange].innerHTML = results[temp][0]
+		}
+		$('#rightPanel').hide();
+	});
+	$('#changeTo06').click(function(){
+		$(this).effect("highlight", {}, 300);
+		temp = currentIdx-toChange;
+		if(temp>=0) {
+			results[temp][0] = "Other procedure";
+			c_taskNameList[toChange].innerHTML = results[temp][0]
+		}
+		$('#rightPanel').hide();
+	});
+	$('#changeTo07').click(function(){
+		$(this).effect("highlight", {}, 300);
+		temp = currentIdx-toChange;
+		if(temp>=0) {
+			results[temp][0] = "Counseling and care coord";
+			c_taskNameList[toChange].innerHTML = results[temp][0]
+		}
+		$('#rightPanel').hide();
+	});
+	$('#changeTo08').click(function(){
+		$(this).effect("highlight", {}, 300);
+		temp = currentIdx-toChange;
+		if(temp>=0) {
+			results[temp][0] = "Write notes and orders";
+			c_taskNameList[toChange].innerHTML = results[temp][0]
+		}
+		$('#rightPanel').hide();
+	});
+	$('#changeTo09').click(function(){
+		$(this).effect("highlight", {}, 300);
+		temp = currentIdx-toChange;
+		if(temp>=0) {
+			results[temp][0] = "Complete forms and paperwork";
+			c_taskNameList[toChange].innerHTML = results[temp][0]
+		}
+		$('#rightPanel').hide();
+	});
+	$('#changeTo10').click(function(){
+		$(this).effect("highlight", {}, 300);
+		temp = currentIdx-toChange;
+		if(temp>=0) {
+			results[temp][0] = "Other";
+			c_taskNameList[toChange].innerHTML = results[temp][0]
+		}
+		$('#rightPanel').hide();
+	});
+
+	//////////////////////////////////
+	// CHANGE ROLES
+	//////////////////////////////////
+	$('#c_ro0').click(function() {
+		$(this).effect("highlight", {}, 300);
+		toRole = 0;
+	});
+	$('#c_ro1').click(function() {
+		$(this).effect("highlight", {}, 300);
+		toRole = 1;
+	});
+	$('#c_ro2').click(function() {
+		$(this).effect("highlight", {}, 300);
+		toRole = 2;
+	});
+	$('#c_ro3').click(function() {
+		$(this).effect("highlight", {}, 300);
+		toRole = 3;
+	});
+
+	$('#changeRoleTo1').click(function(){
+		$(this).effect("highlight", {}, 300);
+		temp = currentIdx-toRole;
+		if(temp>=0) {
+			results[temp][10] = "Physician_";
+			c_roleList[toRole].innerHTML = results[temp][10]
+		}
+	});
+	$('#changeRoleTo2').click(function(){
+		$(this).effect("highlight", {}, 300);
+		temp = currentIdx-toRole;
+		if(temp>=0) {
+			results[temp][10] = "PA/NP_";
+			c_roleList[toRole].innerHTML = results[temp][10]
+		}
+	});
+	$('#changeRoleTo3').click(function(){
+		$(this).effect("highlight", {}, 300);
+		temp = currentIdx-toRole;
+		if(temp>=0) {
+			results[temp][10] = "PT_";
+			c_roleList[toRole].innerHTML = results[temp][10]
+		}
+	});
+	$('#changeRoleTo4').click(function(){
+		$(this).effect("highlight", {}, 300);
+		temp = currentIdx-toRole;
+		if(temp>=0) {
+			results[temp][10] = "Other_";
+			c_roleList[toRole].innerHTML = results[temp][10]
+		}
+	});
+
+
+//EXTRA
+/*    		//alert("here");
+		var currDiv = $('<div id="newTask">Review of Info<br><div id="c_delete">DELETE</div><div id="c_change">CHANGE</div><div id="c_note">NOTE</div></div>')
+
+		$('#currentTask').html(currDiv);*/
+
+		/*function runClock01(ph, pm, ps) {
+
+   var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    var dh = h-ph;
+    var dm = m-pm;
+    var ds = s-ps;
+    if(dm<0) { dm=m;};
+    if (ds<0) { ds = s;};
+    var diff = dh*60*60 + dm*60 + ds;
+// alert(ps)
+	
+
+    document.getElementById('c_cnter01').innerHTML = diff;
+    var t = setTimeout(runClock01(ph, pm, ps), 500);
+}*/
+</script>
+
+
+</body>
+</html>
