@@ -1,0 +1,364 @@
+body {
+    font-family:arial;
+    font-size: 1.5em;    
+    /**width: 1100px;
+    **/
+}
+#container {
+    width: 1100px;
+    height: 600px;
+    border: blue solid 1px;
+}
+#topContainer{
+    width: 1100px;
+    border: yellow solid 1px;
+    text-align: center;
+}
+#middleContainer {
+    width: 1100px;
+    border: red solid 1px;
+}
+p {
+    font-size:.1em;
+}
+/*************************************/
+#col1, #col2, #col3, #col4, #col5 {
+    border-color: green;
+    border-style: solid;
+    border-width: 2px;
+    padding: 2px;
+    width: 210px;
+    float: left;
+    text-align: center;    
+}
+
+#col1 div, #col2 div, #col3 div, #col4 div,
+#caseStart, #caseEnd, #multiTask {
+    height: 50px;
+    width: 200px;
+    background-color: #808080;
+    font-family: arial;
+    font-weight: bold;
+    font-size: .75em;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 54px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 2px black solid;
+    display: inline-block;
+}
+
+#note {
+    height: 70px;
+    width: 200px;
+    font-size: 20px;
+
+}
+
+#list {
+    border: black solid 3px;
+    border-radius: 2px;
+    margin: auto;
+    width: 200px;
+    height: 175px;
+    text-align: center;
+    overflow-y: scroll;
+}
+
+.item {
+    height: 60px;
+    width: 150px;
+    background-color: rgb(227, 142, 45);
+    color: white;
+    font-size: 20px;
+    border-radius: 5px; 
+    text-align: center;
+    line-height: 60px;
+    margin: auto;
+    margin-top: 2px;
+    border-right: solid 15px gray;
+}
+
+
+#log {
+    overflow-y: scroll;
+    height: 75px;
+    font-size: .5em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*************************************/
+
+#stateAtt {
+    border: black solid 3px;
+    border-radius: 2px;
+    margin: auto;
+    padding: 5px;
+    width: 300px;
+    text-align: center;
+}
+#locationAtt {
+    border: black solid 3px;
+    border-radius: 2px;
+    margin: auto;
+    margin-top: 5px;
+    padding: 5px;
+    width: 300px;
+    text-align: center;
+}
+#interruptAtt {
+    border: black solid 3px;
+    border-radius: 2px;
+    margin: auto;
+    margin-top: 5px;
+    padding: 5px;
+    width: 300px;
+    text-align: center;
+}
+#notesAtt {
+    border: black solid 3px;
+    border-radius: 2px;
+    margin: auto;
+    margin-top: 5px;
+    padding: 5px;
+    width: 300px;
+    text-align: center;
+}
+
+
+/*************************************/
+
+
+#stateAtt div {
+    height: 40px;
+    width: 200px;
+    background-color: #808080;
+    font-family: arial;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 40px;
+    margin-top: 2px;
+    border: 2px black solid;
+    display: inline-block;
+}
+#locationAtt div {
+    height: 40px;
+    width: 100px;
+    background-color: #808080;
+    font-family: arial;
+    font-weight: normal;
+    font-size: .5em;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 40px;
+    margin-top: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+    border: 2px black solid;
+    display: inline-block;
+}
+#interruptAtt div {
+    height: 40px;
+    width: 200px;
+    background-color: #808080;
+    font-family: arial;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 40px;
+    margin-top: 2px;
+    border: 2px black solid;
+    display: inline-block;
+}
+
+#notesAtt div {
+    height: 40px;
+    width: 200px;
+    background-color: #808080;
+    font-family: arial;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 40px;
+    margin-top: 2px;
+    border: 2px black solid;
+    display: inline-block;
+}
+
+
+
+
+
+
+/*************************************/
+
+h2 {
+    font-family:arial;
+}
+
+form {
+    /* display: inline-block; */
+    border-color: black;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 2px;
+    float: right;
+    width: 650px;
+    padding: 10px;
+}
+
+#nameForm {
+    height: 35px;
+    width: 250px;
+    font-size: 30px;
+}
+
+#locationForm {
+    height: 35px;
+    width: 300px;
+    font-size: 30px;
+}
+
+
+#formDiv {
+    margin: 4px;
+}
+
+
+
+#formDiv label {
+    float: left;
+    width:190px;
+    /*height: 100px; */
+    margin:4px;
+    background-color:#EFEFEF;
+    border-radius:5px;
+    border:1px solid #2e2e2e;
+    overflow:auto;
+       
+}
+
+#formDiv label span {
+    text-align:center;
+    font-size: 25px;
+    padding: 13px 20px;
+    display: block;
+}
+
+#formDiv label input {
+    position:absolute;
+    top:-20px;
+}
+
+#formDiv input:checked + span{
+    background-color:#ff7e40;
+    color:#000000;
+}
+
+
+#formDiv .radioButton {
+  background-color: #808080;
+  color: #ffffff;
+}
+
+
+
+
+
+
+
+
+
+#exportButton {
+    height: 40px;
+    width: 200px;
+    background-color: #808080;
+    font-family: arial;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 40px;
+    margin-top: 2px;
+    border: 2px black solid;
+}
+
+#updateButton {
+    display: inline-block;
+    height: 60px;
+    width: 250px;
+    background-color: #000099;
+    font-family: arial;
+    font-size: 1.2em;
+    color: white;
+    text-align: center;
+    margin-top: 2px;
+}
+
+#saved {
+    display: inline-block;
+    color: green;
+    margin-left: 30px;
+}
+#startButton {
+    display: inline-block;
+    height: 40px;
+    width: 210px;
+    background-color: #008800;
+    font-family: arial;
+    font-size: 1.2em;
+    color: white;
+    text-align: center;
+    margin-top: 2px;
+}
+#stopButton {
+    display: inline-block;
+    height: 40px;
+    width: 210px;
+    background-color: #990000;
+    font-family: arial;
+    font-size: 1.2em;
+
+    color: white;
+    text-align: center;
+    margin-top: 2px;
+}
+#compButton {
+    display: inline-block;
+    height: 40px;
+    width: 210px;
+    background-color: #000000;
+    font-family: arial;
+    font-size: 1.2em;
+    color: white;
+    text-align: center;
+    margin-top: 2px;
+}
+

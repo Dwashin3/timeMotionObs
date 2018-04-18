@@ -1,0 +1,138 @@
+body {
+    font-family:arial;
+    font-size: 1.5em;    
+    /**width: 1100px;
+    **/
+}
+#container {
+    width: 1000px;
+    height: 615px;
+    border: black solid 1px;
+}
+#topContainer{
+    width: 1000px;
+    border: black solid 1px;
+    text-align: center;
+}
+#middleContainer {
+    width: 1000px;
+    border: black solid 1px;
+}
+p {
+    font-size:.1em;
+}
+/*************************************/
+#col1, #col2, #col3, #col4, #col5 {
+    border: black solid 2px;
+    padding: 2px;
+    width: 190px;
+    float: left;
+    text-align: center;    
+}
+
+#col1 div, #col2 div, #col3 div, #col4 div,
+#caseStart, #caseEnd, #multi, #exportButton {
+    height: 50px;
+    width: 180px;
+    background-color: #808080;
+    font-family: arial;
+    font-weight: bold;
+    font-size: .75em;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 54px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 2px black solid;
+    display: inline-block;
+}
+
+#exportButton {
+    height: 50px;
+    width: 180px;
+    background-color: #808080;
+    font-family: arial;
+    font-weight: bold;
+    font-size: .75em;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 54px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 100px;
+    border: 2px black solid;
+    display: inline-block;
+}
+
+#note {
+    height: 70px;
+    width: 180px;
+    font-size: 20px;
+
+}
+
+#list {
+    border: black solid 3px;
+    border-radius: 2px;
+    margin: auto;
+    width: 180px;
+    height: 300px;
+    text-align: center;
+    overflow-y: scroll;
+}
+
+.item {
+    height: 60px;
+    width: 130px;
+    background-color: rgb(227, 142, 45);
+    color: white;
+    font-size: 20px;
+    border-radius: 5px; 
+    text-align: center;
+    line-height: 60px;
+    margin: auto;
+    margin-top: 2px;
+    border-right: solid 15px gray;
+}
+
+
+#log {
+    overflow-y: scroll;
+    height: 100px;
+    font-size: .5em;
+}
+
+#end {
+    height: 40px;
+    width: 180px;
+    background-color: #808080;
+    font-family: arial;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 40px;
+    margin-top: 2px;
+    border: 2px black solid;
+    display: inline-block;
+}
+
+
+#formDiv label span {
+    text-align:center;
+    font-size: 25px;
+    padding: 13px 20px;
+    display: block;
+}
+
+#formDiv label input {
+    position:absolute;
+    top:-20px;
+}
+
+#formDiv input:checked + span{
+    background-color:#ff7e40;
+    color:#000000;
+}
