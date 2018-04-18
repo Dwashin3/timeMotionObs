@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>FormPrototype</title>
+    
+    <link rel="stylesheet" type="text/css" href="edstylesheet.css"/>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script type="text/javascript" src="edscript.js"></script>
+</head>
+
+<body>
+    
+    <div id="leftPanel">
+    	<div id="taskGroup">
+			SELECT TASK TYPE:<br/>
+			<div id="add_comp_pthx_hpi">computer_pthx_hpi</div>
+			<div id="add_comp_lires">comp_lires</div>
+			<div id="add_comp_disp">comp_disp</div>
+			<br>
+	    	<div id="add_pt_con_hist">pt_con_hist</div>
+			<div id="add_pt_pro_pe">pt_pro_pe</div>
+	    	<div id="add_equip_malf">equip_malf</div>
+	        <div id="add_equip_miss">equip_miss</div>
+	        <div id="add_nursetech_ord">nursetech_ord</div>
+	        <div id="add_nursetech_other">nursetech_other</div>
+	        <div id="add_student_sup">student_sup</div>
+	        <div id="add_student_tea">student_tea</div>
+	        <div id="add_phone_adm">phone_adm</div>
+	        <div id="add_phone_cons">phone_cons</div>
+	        <div id="add_phone_emt">phone_emt</div>
+	        <br/>
+     
+	        <div id="add_phys_adm">phys_adm</div>
+	        <div id="add_phys_cons">phys_cons</div>
+	        <div id="add_delays">delays</div>
+	        <div id="add_other">other</div>
+	        <br/>
+	        <a id = "created" href="http://medicalhumanfactors.net" target="_blank">MedStar National Center for Human Factors in Healthcare</a> 
+	    </div>
+    </div>
+    
+        
+    <div id="middlePanel">
+	<div id="stateAtt">
+	    <div class="multi">MultiTask</div>
+	</div>
+
+	<!-- LOCATION SubContainer -->
+	<!--
+	<div id="locationAtt">
+	    LOCATION:<br/>
+	    <div id="loc-wow">WOW</div>
+	    <div id="loc-desk">WS</div>
+	    <div id="loc-ipr">IPR</div>
+	    <div id="loc-opr">OPR</div>	    
+	    <div id="loc-hall">Hallway</div>
+	    <div id="loc-other">Other</div>
+	</div>
+	-->
+
+	<div id="interruptAtt">
+	    INTERRUPT STRATEGY:<br/>
+	    <div id="interrupt">Interrupt</div>
+	</div>
+	<div id="notesAtt">
+	    <textarea id="description" value=""></textarea>
+	    <div id="addNote">Add Note</div>
+	</div>
+	<div id="patCounterAtt">
+		PATIENT COUNTER:<br/>
+		<div id="subP">-</div>
+		<p id="patCnt">0</p>
+		<div id="addP">+</div>
+	</div>
+
+
+    </div>
+    
+
+
+    <div id="rightPanel">
+	Start Time: <span id="p1">asdf</span>
+	<div id="exportButton">Export Data</div>
+	<br/>
+	<br/>
+	<div id="status">STATUS:</div>
+	<div id="list">
+        </div>
+	<div id="end">Remove</div>
+	
+	<br/>
+	<br/>
+	Log
+	<div id="log">
+	    
+	</div>
+    </div>
+
+
+
+</body>
+</html>
