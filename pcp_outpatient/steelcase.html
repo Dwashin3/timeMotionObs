@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>FormPrototype</title>
+    
+    <link rel="stylesheet" type="text/css" href="steelcase.css"/>
+    <script type="text/javascript" src="steelcase.js"></script>	
+	<script type="text/javascript" src="jquery.js"></script>
+
+	<script type="text/javascript" src="jquery-ui.js"></script>
+
+	<script type="text/javascript" src="moment.js"></script>
+	
+	<script language="javascript" type="text/javascript" src="jquery.flot.js"></script> 
+	
+	<script type="text/javascript" src="connectToBitalino.js"></script>
+
+</head>
+
+
+
+<body onload="onLoad()">
+
+	<div id="taskTracker">
+    
+		<div id="leftPanel">
+			<div id="taskGroup">
+				SELECT TASK TYPE:<br/>
+			</div>    
+
+		</div> <!-- END leftPanel -->
+    
+	
+		<div id="middlePanel">
+			Start Time: <span id="starttime"></span>
+			<br/>
+			Current Time: <span id="currenttime"></span>
+			<div class="taskContainer">
+				<div name="c_taskName">.....</div>
+				<div name="c_ro">.....</div>
+				<div name="c_st">.....</div>
+				<div name="c_rt">.....</div>
+				<div name="c_et">.....</div>
+				<div id="c_note0" onclick="writeNote(0);">NOTE</div>
+				<div id="c_ch0" onclick="changeTaskNum(0);">CHNG</div>
+				<div id="c_stop0" onclick="stopTask(0);">STOP</div>
+				<div id="c_ro0" onclick="changeTaskLocation(0)">LOC</div>
+				<div id="c_delete0" onclick="deleteFirstTask();">D</div>
+	
+			</div>
+
+			<div class="taskContainer">
+				<div name="c_taskName">.....</div>
+				<div name="c_ro">.....</div>
+				<div name="c_st">.....</div>
+				<div name="c_rt">.....</div>
+				<div name="c_et">.....</div>
+				<div id="c_note1" onclick="writeNote(1);">NOTE</div>
+				<div id="c_ch1" onclick="changeTaskNum(1);">CHNG</div>
+				<div id="c_stop1" onclick="stopTask(1);">STOP</div>
+				<div id="c_ro1" onclick="changeTaskLocation(1)">LOC</div>
+			</div>
+
+
+			<div class="taskContainer">
+				<div name="c_taskName">.....</div>
+				<div name="c_ro">.....</div>
+				<div name="c_st">.....</div>
+				<div name="c_rt">.....</div>
+				<div name="c_et">.....</div>
+				<div id="c_note2" onclick="writeNote(2);">NOTE</div>
+				<div id="c_ch2" onclick="changeTaskNum(2);">CHNG</div>
+				<div id="c_stop2" onclick="stopTask(2);">STOP</div>
+				<div id="c_ro2" onclick="changeTaskLocation(2)">LOC</div>
+			</div>
+
+			<div class="taskContainer">
+				<div name="c_taskName">.....</div>
+				<div name="c_ro">.....</div>
+				<div name="c_st">.....</div>
+				<div name="c_rt">.....</div>
+				<div name="c_et">.....</div>
+				<div id="c_note3" onclick="writeNote(3);">NOTE</div>
+				<div id="c_ch3" onclick="changeTaskNum(3);">CHNG</div>
+				<div id="c_stop3" onclick="stopTask(3);">STOP</div>
+				<div id="c_ro3" onclick="changeTaskLocation(3)">LOC</div>
+			</div>
+		
+			<div id="divLocation">
+				<div class="location" id="setToLocation1" onclick="assignLocation(this.id);"></div>
+				<div class="location" id="setToLocation2" onclick="assignLocation(this.id);"></div>
+				<div class="location" id="setToLocation3" onclick="assignLocation(this.id);"></div>
+				<div class="location" id="setToLocation4" onclick="assignLocation(this.id);"></div>			
+				<div class="location" id="setToLocation5" onclick="assignLocation(this.id);"></div>			
+				<div class="location" id="setToLocation6" onclick="assignLocation(this.id);"></div>			
+				<div class="location" id="setToLocation7" onclick="assignLocation(this.id);"></div>			
+				<div class="location" id="setToLocation8" onclick="assignLocation(this.id);"></div>			
+				<div class="location" id="setToLocation9" onclick="assignLocation(this.id);"></div>			
+				<div class="location" id="setToLocation10" onclick="assignLocation(this.id);"></div>			
+				<div class="location" id="setToLocation11" onclick="assignLocation(this.id);"></div>			
+			</div>
+		
+			<div id="divHeartBeat">
+				<img id="heartBeat" src="heart_beat.png" onclick="toggleScreen();">
+			</div>
+
+			<div id="exportButton" onclick="exportResults(true);">Export Data</div>
+	
+		</div> <!-- END middlePanel -->
+
+
+		<div id="rightPanel"></div> 
+
+		<div id="notePanel">
+			<input type="textbox" id = "comments" style="width: 300px; height: 50px;">
+			 <div id="saveNote" onclick="saveNote();">Save Note</div>
+			 <div id="cancelNote" onclick="cancelNote()">Cancel</div>
+
+		</div> <!-- END notePanel -->
+
+	</div> <!--END task tracker-->
+	
+	<div id="bitalinoCalibration">
+
+		<div id="title" style="font-size: 50px;">Heart Rate Monitor Calibration</div>
+
+		<img id="checklist" onclick="toggleScreen();" src="checklist.gif">
+	
+		</br> 
+	
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		
+		<button class="bitalinoButtons" id="startButton" type="button" onclick="startButtonClicked()">Start</button>
+				
+		&nbsp;&nbsp;&nbsp;&nbsp;
+
+		<button class="bitalinoButtons" id="stopButton" type="button" onclick="stopButtonClicked()">Stop</button>
+		
+		<div id="serverResponse">Server: </div>
+		
+		
+		<div id="placeholder" style="width:1200px; height:300px; margin-top: 100px"></div>
+	
+	</div> <!--END calibration-->
+
+	
+	
+	
+</body>
+</html>
